@@ -7,7 +7,7 @@ class logwatch($email) {
 
     file { '/etc/cron.daily/00logwatch':
         ensure => file,
-        content => '/usr/sbin/logwatch --output mail --mailto $email --detail high',
-        require => Packace['logwatch']
+        content => "/usr/sbin/logwatch --output mail --mailto $email --detail high",
+        require => Package['logwatch']
     }
 }
