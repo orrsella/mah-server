@@ -15,19 +15,9 @@ if $operatingsystem != 'ubuntu' {
 # Users #
 #########
 
-# Create user group
-group { $user:
-    ensure => present
-}
-
-# Create user
-user { "$user":
-    ensure => present,
-    gid => $user,
-    password => $pwd,
-    managehome => true,
-    home   => "/home/$user",
-    require => Group[$user],
+class { 'users':
+    user     => $user,
+    password => $password
 }
 
 ############
@@ -40,7 +30,10 @@ class { 'sshkeys':
     ssh_key_type => $ssh_key_type
 }
 
-class { 'sudoers': }
+class { 'sudoers':
+    user => $user
+}
+
 class { 'firewall': }
 class { 'aptupgrades': }
 class { 'fail2ban': }

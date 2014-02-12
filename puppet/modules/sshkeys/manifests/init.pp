@@ -1,14 +1,5 @@
 class sshkeys($user, $ssh_pub_key, $ssh_key_type) {
 
-    # Ensure the home directory exists with the right permissions
-    file { "/home/$user":
-        ensure  => directory,
-        owner   => $user,
-        group   => $user,
-        mode    => '0750',
-        require => [User[$user], Group[$user]]
-    }
-
     # Ensure the .ssh directory exists with the right permissions
     file { "/home/$user/.ssh":
         ensure  =>  directory,
