@@ -11,28 +11,32 @@ if $operatingsystem != 'ubuntu' {
 }
 
 
-#########
-# Users #
-#########
+#
+# Users
+#
+# class { 'users':
+#     user     => $user,
+#     password => $password
+# }
 
-class { 'users':
-    user     => $user,
-    password => $password
-}
-
-############
-# Security #
-############
+#
+# Security
+#
+# class { 'sshkeys':
+#     user => $user,
+#     ssh_pub_key => $ssh_pub_key,
+#     ssh_key_type => $ssh_key_type
+# }
 
 class { 'sshkeys':
-    user => $user,
+    user => 'root',
     ssh_pub_key => $ssh_pub_key,
     ssh_key_type => $ssh_key_type
 }
 
-class { 'sudoers':
-    user => $user
-}
+# class { 'sudoers':
+#     user => $user
+# }
 
 class { 'firewall': }
 class { 'aptupgrades': }
@@ -42,10 +46,12 @@ class { 'logwatch':
     email => $logwatch_email
 }
 
-########
-# Misc #
-########
-
+#
+# Misc
+#
 class { 'tools': }
 
-# setup default bachrc file
+#
+# Applications
+#
+class { 'ghost': }

@@ -31,6 +31,7 @@ $ source /etc/profile.d/rvm.sh
 $ rvm requirements
 $ rvm install ruby
 $ rvm use ruby --default
+$ rvm rubygems current
 ```
 
 #### Install puppet for a standalone deployment
@@ -72,10 +73,14 @@ $ cp /opt/orrsella.com/puppet/hiera.yaml /etc/puppet/
 ```
 $ puppet module install netmanagers/fail2ban
 $ puppet module install attachmentgenie/ufw
+$ puppet module install willdurand/nodejs
+
 ```
 
 #### Run puppet
 
 ```
-$ puppet apply /opt/orrsella.com/puppet/manifests/site.pp
+$ sudo puppet apply /opt/orrsella.com/puppet/manifests/site.pp
 ```
+
+`sudo` is required here if run by non-root user (to load the correct additional `modulepath`).

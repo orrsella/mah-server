@@ -25,6 +25,15 @@ class users($user, $password) {
         require => User[$user]
     }
 
+    # Ensure the .ssh directory exists with the right permissions
+    file { "/home/$user/.ssh":
+        ensure  =>  directory,
+        owner   =>  $user,
+        group   =>  $user,
+        mode    =>  '0700',
+        require =>  File["/home/$user"],
+    }
+
     file { "/home/$user/.profile":
         ensure  => present,
         source  => 'puppet:///modules/users/.profile',
