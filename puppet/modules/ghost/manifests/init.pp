@@ -38,4 +38,11 @@ class ghost {
         target    => "/opt/ghost-$version",
         require   => File["/opt/ghost-$version/"]
     }
+
+    nodejs::npm { "/opt/ghost-$version:ghost":
+        ensure  => present,
+        install_opt => '--production',
+        require   => Archive["ghost-$version"]
+        # version => '2.5.9',
+    }
 }
