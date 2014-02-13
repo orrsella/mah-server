@@ -40,7 +40,7 @@ $ ./setup.sh
 
 #### Configure puppet
 
-Optionally create a cron task to regularly run puppet apply on a main manifest (usually the same `/etc/puppet/manifests/site.pp` manifest that puppet master uses):
+Optionally create a cron task to regularly run puppet apply on a main manifest:
 
 ```
 $ sudo puppet resource cron puppet-apply ensure=present user=root minute=30 command='/usr/bin/puppet apply $(puppet apply --configprint manifest)'
@@ -48,7 +48,7 @@ $ sudo puppet resource cron puppet-apply ensure=present user=root minute=30 comm
 
 #### Run puppet
 
-Make sure to do so with `root` user:
+Update any parameters needed in `site.pp` and run puppet. Make sure to do so with `root` user:
 
 ```
 $ puppet apply /opt/orrsella.com/puppet/manifests/site.pp
