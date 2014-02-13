@@ -19,7 +19,7 @@ class ghost {
     # ghost version
     $version = '0.4.1'
 
-    file { "ghost-$version.zip"
+    file { "ghost-$version.zip":
         ensure => present,
         path => "/opt/ghost-$version/",
         source => "https://ghost.org/zip/ghost-$version.zip",
