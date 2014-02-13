@@ -40,7 +40,8 @@ class ghost {
             extension => 'zip',
             checksum  => false,
             target    => "/opt/ghost-$version",
-            require   => File["/opt/ghost-$version/"]
+            require   => File["/opt/ghost-$version/"],
+            notify    => Exec['/usr/local/node/node-default/bin/npm install --production']
         }
     }
 
@@ -55,7 +56,8 @@ class ghost {
 
     exec { '/usr/local/node/node-default/bin/npm install --production':
         cwd         => "/opt/ghost-$version",
-        subscribe   => Archive["ghost-$version"],
-        refreshonly => true
+        # subscribe   => Archive["ghost-$version"],
+        refreshonly => true,
+        # onlyif      =>
     }
 }
