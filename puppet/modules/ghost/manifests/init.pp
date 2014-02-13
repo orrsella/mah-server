@@ -39,12 +39,18 @@ class ghost {
         require   => File["/opt/ghost-$version/"]
     }
 
-    include nodejs
+    # include nodejs
 
-    nodejs::npm { "/opt/ghost-$version:ghost":
-        ensure      => present,
-        install_opt => '--production',
-        require     => Archive["ghost-$version"]
-        # version => '2.5.9',
+    # nodejs::npm { "/opt/ghost-$version:ghost":
+    #     ensure      => present,
+    #     install_opt => '--production',
+    #     require     => Archive["ghost-$version"]
+    #     # version => '2.5.9',
+    # }
+
+    exec { 'npm install --production':
+        cwd         => "/opt/ghost-$version",
+        subscribe   => Archive["ghost-$version"],
+        refreshonly => true
     }
 }
