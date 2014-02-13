@@ -10,16 +10,36 @@ Fire up an Ubuntu 12.04 LTS “Precise Pangolin” server.
 $ ssh root@ip-address
 ```
 
+#### Install and clone git repo
+
+```
+$ apt-get update
+$ apt-get install git
+```
+
+Create ssh key:
+
+```
+$ ssh-keygen -t rsa
+```
+
+Copy the content of `~/.ssh/id_rsa.pub` and add to [GitHub permissions](https://github.com/settings/ssh).
+
+Clone:
+
+```
+$ git clone git@github.com:orrsella/orrsella.com.git /opt/orrsella.com
+```
+
 #### Change root password
 
 ```
 $ passwd
 ```
 
-#### Update apt-get
+#### Upgrade apt-get
 
 ```
-$ apt-get update
 $ apt-get upgrade
 ```
 
@@ -47,15 +67,9 @@ $ apt-get install puppet-common
 
 This will install Puppet without the agent init script. See [Installing Puppet](http://docs.puppetlabs.com/guides/installation.html) for more information.
 
-#### Clone project repo
-
-```
-$ git clone git@github.com:orrsella/orrsella.com.git /opt/orrsella.com
-```
-
 #### Configure puppet
 
-Create a cron task to regularly run puppet apply on a main manifest (usually the same `/etc/puppet/manifests/site.pp` manifest that puppet master uses):
+Optionally create a cron task to regularly run puppet apply on a main manifest (usually the same `/etc/puppet/manifests/site.pp` manifest that puppet master uses):
 
 ```
 $ sudo puppet resource cron puppet-apply ensure=present user=root minute=30 command='/usr/bin/puppet apply $(puppet apply --configprint manifest)'
