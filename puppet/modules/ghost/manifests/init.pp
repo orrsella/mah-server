@@ -34,6 +34,7 @@ class ghost {
         ensure    => present,
         url       => "http://ghost.org/zip/ghost-$version.zip",
         extension => 'zip',
+        checksum  => false,
         target    => "/opt/ghost-$version",
         require   => File["/opt/ghost-$version/"]
     }
