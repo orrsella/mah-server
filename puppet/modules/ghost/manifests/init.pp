@@ -32,8 +32,8 @@ class ghost {
 
     archive { "ghost-$version":
         ensure  => present,
-        url     => "https://ghost.org/zip/ghost-$version.zip",
-        target  => "/opt/ghost-$version/",
+        url     => "http://ghost.org/zip/ghost-$version.zip",
+        target  => "/opt/ghost-$version",
         require => File["/opt/ghost-$version/"]
     }
 }
