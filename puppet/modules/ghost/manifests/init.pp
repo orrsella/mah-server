@@ -12,6 +12,7 @@ class ghost {
 
     # Install nodejs
     class { 'nodejs':
+        ensure => exists,
         version => 'v0.10.25',
         make_install => true
     }
@@ -48,7 +49,7 @@ class ghost {
     #     # version => '2.5.9',
     # }
 
-    exec { 'npm install --production':
+    exec { '/usr/local/node/node-default/bin/npm install --production':
         cwd         => "/opt/ghost-$version",
         subscribe   => Archive["ghost-$version"],
         refreshonly => true
