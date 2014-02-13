@@ -22,7 +22,7 @@ class ghost {
     file { "ghost-$version.zip":
         ensure => present,
         path => "/opt/ghost-$version/",
-        source => "https://ghost.org/zip/ghost-$version.zip",
+        source => "http://ghost.org/zip/ghost-$version.zip",
         require => Class['nodejs']
     }
 }
