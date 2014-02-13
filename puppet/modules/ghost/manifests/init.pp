@@ -33,7 +33,7 @@ class ghost {
     # hack to only extract the archive it ghost doesn't already exist
     $ghost = file("/opt/ghost-$version/package.json", '/dev/null')
 
-    if ($ghost != '') {
+    if ($ghost == '') {
         archive { "ghost-$version":
             ensure    => present,
             url       => "http://ghost.org/zip/ghost-$version.zip",
