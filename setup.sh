@@ -40,3 +40,4 @@ puppet module install netmanagers/fail2ban
 puppet module install attachmentgenie/ufw
 puppet module install willdurand/nodejs
 # puppet module install maestrodev/wget
+puppet module install smarchive/archive

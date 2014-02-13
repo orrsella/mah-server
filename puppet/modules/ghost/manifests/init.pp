@@ -23,10 +23,17 @@ class ghost {
         ensure  => directory
     }
 
-    wget::fetch { "http://ghost.org/zip/ghost-$version.zip":
-        destination => "/opt/ghost-$version/ghost-$version.zip",
-        timeout     => 0,
-        verbose     => false,
-        require     => File["/opt/ghost-$version/"]
+    # wget::fetch { "http://ghost.org/zip/ghost-$version.zip":
+    #     destination => "/opt/ghost-$version/ghost-$version.zip",
+    #     timeout     => 0,
+    #     verbose     => false,
+    #     require     => File["/opt/ghost-$version/"]
+    # }
+
+    archive { "ghost-$version":
+        ensure  => present,
+        url     => "https://ghost.org/zip/ghost-$version.zip",
+        target  => "/opt/ghost-$version/",
+        require => File["/opt/ghost-$version/"]
     }
 }
