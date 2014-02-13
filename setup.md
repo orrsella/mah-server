@@ -10,62 +10,33 @@ Fire up an Ubuntu 12.04 LTS “Precise Pangolin” server.
 $ ssh root@ip-address
 ```
 
-#### Install and clone git repo
+#### Clone git repo
 
 ```
 $ apt-get update
 $ apt-get install git
 ```
 
-Create ssh key:
+* Generate ssh key:
 
 ```
 $ ssh-keygen -t rsa
 ```
 
-Copy the content of `~/.ssh/id_rsa.pub` and add to [GitHub permissions](https://github.com/settings/ssh).
+* Copy the content of `~/.ssh/id_rsa.pub` and add to [GitHub permissions](https://github.com/settings/ssh).
 
-Clone:
+* Clone:
 
 ```
 $ git clone git@github.com:orrsella/orrsella.com.git /opt/orrsella.com
 ```
 
-#### Change root password
+#### Run setup script
 
 ```
-$ passwd
+$ cd /opt/orrsella.com
+$ ./setup.sh
 ```
-
-#### Upgrade apt-get
-
-```
-$ apt-get upgrade
-```
-
-#### Install ruby with RVM (Ruby Version Manager)
-
-```
-$ \curl -L https://get.rvm.io | bash -s stable
-$ source /etc/profile.d/rvm.sh
-$ rvm requirements
-$ rvm install ruby
-$ rvm use ruby --default
-$ rvm rubygems current
-```
-
-#### Install puppet for a standalone deployment
-
-Configure to use Puppet Labs’ packages and install. Make sure to match the release of Ubuntu (`precise` in this example):
-
-```
-$ wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-$ dpkg -i puppetlabs-release-precise.deb
-$ apt-get update
-$ apt-get install puppet-common
-```
-
-This will install Puppet without the agent init script. See [Installing Puppet](http://docs.puppetlabs.com/guides/installation.html) for more information.
 
 #### Configure puppet
 
@@ -75,26 +46,10 @@ Optionally create a cron task to regularly run puppet apply on a main manifest (
 $ sudo puppet resource cron puppet-apply ensure=present user=root minute=30 command='/usr/bin/puppet apply $(puppet apply --configprint manifest)'
 ```
 
-Also, copy the files `puppet.conf` and `hiera.yaml` to `/etc/puppet/`:
-
-```
-$ cp /opt/orrsella.com/puppet/puppet.conf /etc/puppet/
-$ cp /opt/orrsella.com/puppet/hiera.yaml /etc/puppet/
-```
-
-#### Install puppet modules
-
-```
-$ puppet module install netmanagers/fail2ban
-$ puppet module install attachmentgenie/ufw
-$ puppet module install willdurand/nodejs
-
-```
-
 #### Run puppet
 
-```
-$ sudo puppet apply /opt/orrsella.com/puppet/manifests/site.pp
-```
+Make sure to do so with `root` user:
 
-`sudo` is required here if run by non-root user (to load the correct additional `modulepath`).
+```
+$ puppet apply /opt/orrsella.com/puppet/manifests/site.pp
+```
