@@ -9,7 +9,7 @@ class ghost {
     # ghost version
     $version = '0.4.1'
 
-    file { "/opt/ghost/":
+    file { '/opt/ghost/':
         ensure  => directory
     }
 
@@ -26,19 +26,33 @@ class ghost {
             require   => File['/opt/ghost/'],
             notify    => Exec['/usr/local/node/node-default/bin/npm install --production']
         }
+
+        exec { '/usr/local/node/node-default/bin/npm install --production':
+            cwd         => '/opt/ghost',
+            refreshonly => true,
+        }
     }
 
-    exec { '/usr/local/node/node-default/bin/npm install --production':
-        cwd         => '/opt/ghost',
-        refreshonly => true,
-    }
+    # file { '/opt/ghost/config.js':
+    #     ensure  => present,
+    #     source  => 'puppet:///modules/ghost/config.js',
+    #     require => File['/opt/ghost/']
+    # }
 
-    file { '/opt/ghost/config.js':
-        ensure  => present,
-        source  => 'puppet:///modules/ghost/config.js',
+    file { '/opt/ghost/content':
+        ensure => link,
+        target => '/opt/orrsella.com/ghost/content/',
         require => File['/opt/ghost/']
     }
 
+    file { '/opt/ghost/config.js':
+        ensure => link,
+        target => '/opt/orrsella.com/ghost/config.js',
+        require => File['/opt/ghost/content']
+    }
+
+    # Install service control script. Can be controlled by:
+    # $ service ghost start/stop/restart/
     file { '/etc/init/ghost.conf':
         ensure => present,
         source => 'puppet:///modules/ghost/ghost.conf'
