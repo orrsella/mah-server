@@ -12,7 +12,6 @@ class ghost {
 
     # Install nodejs
     class { 'nodejs':
-        ensure => exists,
         version => 'v0.10.25',
         make_install => true
     }
