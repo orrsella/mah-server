@@ -42,12 +42,12 @@ class ghost {
             require   => [File['/opt/ghost/'], Package['unzip']],
             notify    => Exec['/usr/bin/npm install --production']
         }
+    }
 
-        exec { '/usr/bin/npm install --production':
-            cwd         => '/opt/ghost',
-            refreshonly => true,
-            require     => File['/user/bin/npm']
-        }
+    exec { '/usr/bin/npm install --production':
+        cwd         => '/opt/ghost',
+        refreshonly => true,
+        require     => [File['/user/bin/npm'], File['/opt/ghost/package.json']]
     }
 
     file { '/opt/ghost/config.js':
@@ -61,31 +61,6 @@ class ghost {
         target => '/opt/orrsella.com/ghost/content',
         require => File['/opt/ghost/']
     }
-
-    # file { '/opt/ghost/config.js':
-    #     ensure => link,
-    #     target => '/opt/orrsella.com/ghost/config.js',
-    #     require => File['/opt/ghost/content']
-    # }
-
-    # Install init.d script
-    # group { 'ghost':
-    #     ensure => present
-    # }
-
-    # user { 'ghost':
-    #     ensure => present,
-    #     gid => 'ghost'
-    # }
-
-    # file { '/etc/init.d/ghost':
-    #     ensure => present,
-    #     source => 'puppet:///modules/ghost/init.d/ghost',
-    #     owner  => 'ghost',
-    #     group  => 'ghost',
-    #     mode   => 755,
-    #     require => User['ghost']
-    # }
 
     file { '/etc/init.d/ghost':
         ensure  => present,
