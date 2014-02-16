@@ -40,13 +40,13 @@ class ghost {
             checksum  => false,
             target    => '/opt/ghost',
             require   => [File['/opt/ghost/'], Package['unzip']],
-            before    => Exec['/usr/bin/npm install --production']
-            # notify    => Exec['/usr/bin/npm install --production']
+            # before    => Exec['/usr/bin/npm install --production']
+            notify    => Exec['/usr/bin/npm install --production']
         }
     }
 
     exec { '/usr/bin/npm install --production':
-        cwd         => '/opt/ghost',
+        cwd         => '/opt/ghost'
         refreshonly => true,
         # require     => [File['/usr/bin/npm'], Archive["ghost-$ghost_ver"]]
     }
