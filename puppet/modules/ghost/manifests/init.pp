@@ -62,11 +62,11 @@ class ghost {
         require => File['/opt/ghost/']
     }
 
-    file { '/opt/ghost/config.js':
-        ensure => link,
-        target => '/opt/orrsella.com/ghost/config.js',
-        require => File['/opt/ghost/content']
-    }
+    # file { '/opt/ghost/config.js':
+    #     ensure => link,
+    #     target => '/opt/orrsella.com/ghost/config.js',
+    #     require => File['/opt/ghost/content']
+    # }
 
     # Install init.d script
     group { 'ghost':
