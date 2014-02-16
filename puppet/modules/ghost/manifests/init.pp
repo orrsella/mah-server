@@ -40,7 +40,7 @@ class ghost {
             checksum  => false,
             target    => '/opt/ghost',
             require   => [File['/opt/ghost/'], Package['unzip']],
-            # before    => Exec['/usr/bin/npm install --production']
+            before    => File['/opt/ghost/config.js']
             notify    => Exec['/usr/bin/npm install --production']
         }
     }
@@ -48,7 +48,7 @@ class ghost {
     exec { '/usr/bin/npm install --production':
         cwd         => '/opt/ghost',
         refreshonly => true,
-        # require     => [File['/usr/bin/npm'], Archive["ghost-$ghost_ver"]]
+        before      => Service['ghost']
     }
 
     file { '/opt/ghost/config.js':
@@ -60,13 +60,14 @@ class ghost {
     file { '/opt/ghost/content':
         ensure => link,
         target => '/opt/orrsella.com/ghost/content',
-        require => File['/opt/ghost/']
+        require => File['/opt/ghost/config.js']
     }
 
     file { '/etc/init.d/ghost':
         ensure  => present,
         source  => 'puppet:///modules/ghost/init.d/ghost',
-        mode    => 755
+        mode    => 755,
+        require => File['/opt/ghost/content']
     }
 
     # Install service control script. Can be controlled by: $ service ghost start/stop/restart/status
