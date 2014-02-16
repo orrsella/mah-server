@@ -1,13 +1,12 @@
-class logwatch($email) {
+class logwatch {
 
-    # Install Logwatch To Keep An Eye On Things
     package { 'logwatch':
         ensure => present
     }
 
     file { '/etc/cron.daily/00logwatch':
         ensure => file,
-        content => "/usr/sbin/logwatch --output mail --mailto $email --detail high",
+        content => "/usr/sbin/logwatch --output mail --mailto orrsella@gmail.com --detail high\n",
         require => Package['logwatch']
     }
 }
