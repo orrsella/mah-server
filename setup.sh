@@ -1,7 +1,8 @@
 #! /bin/bash
 
 # validate script working directory is main repo dir
-if [ ! -f $dotfiles/setup.sh ] ;
+
+if [ ! -f $(pwd)/setup.sh ] ;
 then
     echo "*** ERROR: Make sure to run script in main repo dir! ***"
     exit

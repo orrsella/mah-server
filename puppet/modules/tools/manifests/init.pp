@@ -8,4 +8,8 @@ class tools {
     package { 'htop':
         ensure => present
     }
+
+    package { 'unzip':
+        ensure => present
+    }
 }

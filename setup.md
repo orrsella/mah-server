@@ -25,6 +25,13 @@ $ ssh-keygen -t rsa
 
 * Copy the content of `~/.ssh/id_rsa.pub` and add to [GitHub permissions](https://github.com/settings/ssh).
 
+* Config git user:
+
+```
+$ git config --global user.name "Orr Sella"
+$ git config --global user.email orrsella@gmail.com
+```
+
 * Clone:
 
 ```
@@ -37,6 +44,8 @@ $ git clone git@github.com:orrsella/orrsella.com.git /opt/orrsella.com
 $ cd /opt/orrsella.com
 $ ./setup.sh
 ```
+
+**IMPORTANT:** Log out and in again, to make sure `rvm` is in scope and can be accessed. (This doesn't seem to work by only sourcing ~/.bashrc.)
 
 #### Configure puppet
 

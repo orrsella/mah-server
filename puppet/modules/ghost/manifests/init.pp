@@ -24,7 +24,7 @@ class ghost {
             extension => 'zip',
             checksum  => false,
             target    => '/opt/ghost',
-            require   => File['/opt/ghost/'],
+            require   => [File['/opt/ghost/'], Package['unzip']],
             notify    => Exec['/usr/bin/npm install --production']
         }
 
