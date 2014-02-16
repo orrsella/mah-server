@@ -40,7 +40,7 @@ class ghost {
             checksum  => false,
             target    => '/opt/ghost',
             require   => [File['/opt/ghost/'], Package['unzip']],
-            before    => File['/opt/ghost/config.js']
+            before    => File['/opt/ghost/config.js'],
             notify    => Exec['/usr/bin/npm install --production']
         }
     }
