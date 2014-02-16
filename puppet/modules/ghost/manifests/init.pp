@@ -47,7 +47,7 @@ class ghost {
     exec { '/usr/bin/npm install --production':
         cwd         => '/opt/ghost',
         refreshonly => true,
-        require     => [File['/user/bin/npm'], File['/opt/ghost/package.json']]
+        require     => [File['/user/bin/npm'], Archive["ghost-$ghost_ver"]]
     }
 
     file { '/opt/ghost/config.js':
