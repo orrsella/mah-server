@@ -1,14 +1,29 @@
 class ghost {
 
     # Install nodejs
+    $node_ver = 'v0.10.25'
+
     class { 'nodejs':
-        version => 'v0.10.25',
+        version      => $node_ver,
         make_install => false,
-        target_dir => '/usr/bin'
+        with_npm     => true,
+        target_dir   => '/usr/local/bin'
+    }
+
+    file { '/usr/bin/node':
+        ensure  => link
+        target  => "/usr/local/node/node-$node_ver/bin/node",
+        require => Class['nodejs']
+    }
+
+    file { '/usr/bin/npm':
+        ensure  => link
+        target  => "/usr/local/node/node-$node_ver/bin/npm",
+        require => Class['nodejs']
     }
 
     # ghost version
-    $version = '0.4.1'
+    $ghost_ver = '0.4.1'
 
     file { '/opt/ghost/':
         ensure  => directory
@@ -18,9 +33,9 @@ class ghost {
     $ghost = file('/opt/ghost/package.json', '/dev/null')
 
     if ($ghost == '') {
-        archive { "ghost-$version":
+        archive { "ghost-$ghost_ver":
             ensure    => present,
-            url       => "http://ghost.org/zip/ghost-$version.zip",
+            url       => "http://ghost.org/zip/ghost-$ghost_ver.zip",
             extension => 'zip',
             checksum  => false,
             target    => '/opt/ghost',
@@ -31,14 +46,15 @@ class ghost {
         exec { '/usr/bin/npm install --production':
             cwd         => '/opt/ghost',
             refreshonly => true,
+            require     => File['/user/bin/npm']
         }
     }
 
-    # file { '/opt/ghost/config.js':
-    #     ensure  => present,
-    #     source  => 'puppet:///modules/ghost/config.js',
-    #     require => File['/opt/ghost/']
-    # }
+    file { '/opt/ghost/config.js':
+        ensure  => present,
+        source  => 'puppet:///modules/ghost/config.js',
+        require => File['/opt/ghost/']
+    }
 
     file { '/opt/ghost/content':
         ensure => link,
@@ -51,21 +67,6 @@ class ghost {
         target => '/opt/orrsella.com/ghost/config.js',
         require => File['/opt/ghost/content']
     }
-
-    # Install service control script. Can be controlled by:
-    # $ service ghost start/stop/restart/
-    # file { '/etc/init/ghost.conf':
-    #     ensure => present,
-    #     source => 'puppet:///modules/ghost/ghost.conf'
-    # }
-
-    # service { 'ghost':
-    #     ensure    => running,
-    #     enable    => true,
-    #     subscribe => File['/opt/ghost/config.js'],
-    #     require   => File['/etc/init/ghost.conf']
-    # }
-
 
     # Install init.d script
     group { 'ghost':
@@ -86,8 +87,7 @@ class ghost {
         require => User['ghost']
     }
 
-    # Install service control script. Can be controlled by:
-    # $ service ghost start/stop/restart/status
+    # Install service control script. Can be controlled by: $ service ghost start/stop/restart/status
     service { 'ghost':
         ensure    => running,
         enable    => true,
