@@ -87,17 +87,18 @@ class ghost {
     #     require => User['ghost']
     # }
 
-    file { '/etc/init/ghost.conf':
-        ensure => present,
-        source => 'puppet:///modules/ghost/ghost.conf'
+    file { '/etc/init.d/ghost':
+        ensure  => present,
+        source  => 'puppet:///modules/ghost/init.d/ghost',
+        mode    => 755
     }
 
-    # Install service control script. Can be controlled by: $ ghost start/stop/restart/status
+    # Install service control script. Can be controlled by: $ service ghost start/stop/restart/status
     service { 'ghost':
-        ensure    => running,
-        enable    => true,
-        hasstatus  => true,
-        hasrestart => true,
-        require   => File['/etc/init/ghost.conf']
+        ensure      => running,
+        enable      => true,
+        hasstatus   => true,
+        hasrestart  => true,
+        require     => File['/etc/init.d/ghost']
     }
 }
