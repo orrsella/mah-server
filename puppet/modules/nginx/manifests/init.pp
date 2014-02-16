@@ -19,7 +19,8 @@ class nginx {
     service { 'nginx':
         ensure    => running,
         enable    => true,
-        subscribe => [File['/etc/nginx/sites-enabled/ghost.conf'], File['/etc/nginx/nginx.conf']],
+        #subscribe => [File['/etc/nginx/sites-enabled/ghost.conf'], File['/etc/nginx/nginx.conf']],
+        subscribe => File['/etc/nginx/sites-enabled/ghost.conf'],
         require   => File['/etc/nginx/sites-enabled/ghost.conf']
     }
 }
