@@ -91,7 +91,8 @@ class ghost {
     service { 'ghost':
         ensure    => running,
         enable    => true,
-        subscribe => File['/opt/ghost/config.js'],
+        hasstatus  => true,
+        hasrestart => true,
         require   => File['/etc/init.d/ghost']
     }
 }
