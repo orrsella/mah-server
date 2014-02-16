@@ -34,3 +34,4 @@ class { 'tools': }
 # Applications
 #
 class { 'ghost': }
+class { 'nginx': }
