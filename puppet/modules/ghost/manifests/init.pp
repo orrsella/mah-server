@@ -79,7 +79,7 @@ class ghost {
 
     file { '/etc/init.d/ghost':
         ensure => present,
-        source => 'puppet:///modules/ghost/init.d/ghost'
+        source => 'puppet:///modules/ghost/init.d/ghost',
         owner  => 'ghost',
         group  => 'ghost',
         mode   => 755,
