@@ -68,14 +68,14 @@ class ghost {
 
 
     # Install init.d script
-    # group { 'ghost':
-    #     ensure => present
-    # }
+    group { 'ghost':
+        ensure => present
+    }
 
-    # user { 'ghost':
-    #     ensure => present,
-    #     gid => 'ghost'
-    # }
+    user { 'ghost':
+        ensure => present,
+        gid => 'ghost'
+    }
 
     file { '/etc/init.d/ghost':
         ensure => present,
