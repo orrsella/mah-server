@@ -69,30 +69,35 @@ class ghost {
     # }
 
     # Install init.d script
-    group { 'ghost':
-        ensure => present
-    }
+    # group { 'ghost':
+    #     ensure => present
+    # }
 
-    user { 'ghost':
+    # user { 'ghost':
+    #     ensure => present,
+    #     gid => 'ghost'
+    # }
+
+    # file { '/etc/init.d/ghost':
+    #     ensure => present,
+    #     source => 'puppet:///modules/ghost/init.d/ghost',
+    #     owner  => 'ghost',
+    #     group  => 'ghost',
+    #     mode   => 755,
+    #     require => User['ghost']
+    # }
+
+    file { '/etc/init/ghost.conf':
         ensure => present,
-        gid => 'ghost'
+        source => 'puppet:///modules/ghost/ghost.conf'
     }
 
-    file { '/etc/init.d/ghost':
-        ensure => present,
-        source => 'puppet:///modules/ghost/init.d/ghost',
-        owner  => 'ghost',
-        group  => 'ghost',
-        mode   => 755,
-        require => User['ghost']
-    }
-
-    # Install service control script. Can be controlled by: $ service ghost start/stop/restart/status
+    # Install service control script. Can be controlled by: $ ghost start/stop/restart/status
     service { 'ghost':
         ensure    => running,
         enable    => true,
         hasstatus  => true,
         hasrestart => true,
-        require   => File['/etc/init.d/ghost']
+        require   => File['/etc/init/ghost.conf']
     }
 }
