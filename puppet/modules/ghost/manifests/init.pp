@@ -46,7 +46,7 @@ class ghost {
     }
 
     exec { '/usr/bin/npm install --production':
-        cwd         => '/opt/ghost'
+        cwd         => '/opt/ghost',
         refreshonly => true,
         # require     => [File['/usr/bin/npm'], Archive["ghost-$ghost_ver"]]
     }
