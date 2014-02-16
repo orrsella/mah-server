@@ -40,7 +40,8 @@ class ghost {
             checksum  => false,
             target    => '/opt/ghost',
             require   => [File['/opt/ghost/'], Package['unzip']],
-            notify    => Exec['/usr/bin/npm install --production']
+            before    => Exec['/usr/bin/npm install --production']
+            # notify    => Exec['/usr/bin/npm install --production']
         }
     }
 
