@@ -11,7 +11,7 @@ class ghost {
     }
 
     file { '/usr/bin/node':
-        ensure  => link
+        ensure  => link,
         target  => "/usr/local/node/node-$node_ver/bin/node",
         require => Class['nodejs']
     }
