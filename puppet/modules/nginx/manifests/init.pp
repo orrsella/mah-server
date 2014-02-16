@@ -6,7 +6,7 @@ class nginx {
 
     file { '/etc/nginx/sites-available/ghost.conf':
         ensure  => present,
-        source  => 'puppet:///modules/nginx/sites-available/ghost.conf'
+        source  => 'puppet:///modules/nginx/sites-available/ghost.conf',
         require => Package['nginx']
     }
 
