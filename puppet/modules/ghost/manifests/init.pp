@@ -58,8 +58,9 @@ class ghost {
     }
 
     file { '/opt/ghost/content':
-        ensure => link,
-        target => '/opt/orrsella.com/ghost/content',
+        ensure  => link,
+        force   => true,
+        target  => '/opt/orrsella.com/ghost/content',
         require => File['/opt/ghost/config.js']
     }
 
