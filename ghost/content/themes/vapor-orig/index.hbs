@@ -1,7 +1,6 @@
 {{!< default}}
 
 <header id="site-head">
-    {{> links}}
     {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><div class="bloglogo" style="background: url({{@blog.logo}})"></div></a>{{/if}}
     <h1 class="blog-title"><a href="{{@blog.url}}">{{@blog.title}}</a></h1>
     <h2 class="blog-description">{{@blog.description}}</h2>
