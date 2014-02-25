@@ -13,6 +13,10 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>http://orrsella.com/2014/02/25/integrating-play-framework-and-maven/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>http://orrsella.com/2013/10/08/zsh-promp-format-with-date-time-and-current-directory/</loc>
     <changefreq>monthly</changefreq>
   </url>
