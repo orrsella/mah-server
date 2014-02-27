@@ -13,6 +13,10 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>http://orrsella.com/2014/02/27/the-default-scala-seq-is-mutable-wait-what/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>http://orrsella.com/2014/02/25/integrating-play-framework-and-maven/</loc>
     <changefreq>monthly</changefreq>
   </url>
