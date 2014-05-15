@@ -16,6 +16,12 @@ class nginx {
         require => File['/etc/nginx/nginx.conf']
     }
 
+    file { '/etc/nginx/sites-available/sella.org.conf':
+        ensure  => present,
+        source  => 'puppet:///modules/nginx/sites-available/sella.org.conf',
+        require => File['/etc/nginx/nginx.conf']
+    }
+
     file { '/etc/nginx/sites-enabled/ghost.conf':
         ensure  => link,
         target  => '/etc/nginx/sites-available/ghost.conf',
@@ -23,9 +29,16 @@ class nginx {
         before  => Service['nginx']
     }
 
+    file { '/etc/nginx/sites-enabled/sella.org.conf':
+        ensure  => link,
+        target  => '/etc/nginx/sites-available/sella.org.conf',
+        require => File['/etc/nginx/sites-available/sella.org.conf'],
+        before  => Service['nginx']
+    }
+
     service { 'nginx':
         ensure    => running,
         enable    => true,
-        subscribe => [File['/etc/nginx/sites-available/ghost.conf'], File['/etc/nginx/nginx.conf']]
+        subscribe => [File['/etc/nginx/sites-available/ghost.conf'], File['/etc/nginx/sites-available/sella.org.conf'], File['/etc/nginx/nginx.conf']]
     }
 }
