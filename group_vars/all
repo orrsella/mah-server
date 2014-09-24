@@ -1,0 +1,4 @@
+---
+
+ghost_port: 2368
+nginx_user: www-data

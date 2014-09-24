@@ -1,0 +1,4 @@
+---
+
+nginx_www_dir: /opt/nginx-www/sella.org
+nginx_site_name: sella.org

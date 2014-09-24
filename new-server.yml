@@ -1,0 +1,38 @@
+---
+
+- hosts: all
+  user: root
+  sudo: true
+
+  # passwords need to be crypted:
+  # $ mkpasswd --method=SHA-512 <plaintext-password>
+
+  vars:
+    root_pwd: $6$OPYV3p0DTPU$Vu6rQl3jSafP41topJQPjpw9D0oGd2xrv4LgKfJuH9oqoaMcxbW3vt6X9zP6.GEpZEB6qW31HWDt1N204y46v0
+    deploy_user: deploy
+    deploy_pwd: $6$nvYeWu5cu.G$cp.f74L/JAq6VqCXr/wqbQElgBHixLQZrjuyLyh7F5X0wqaqu2Ydwm2S3ct5T0hIv8Nw0U5QiBm7l3vKqbehD1
+    deploy_sudoers: '{{ deploy_user }}  ALL=(ALL) NOPASSWD: ALL'
+
+  tasks:
+    - name: Change root password
+      user: name=root password={{ root_pwd }} state=present
+
+    - name: Create ansible deploy user
+      user: name={{ deploy_user }} password={{ deploy_pwd }} shell=/bin/bash state=present generate_ssh_key=yes
+
+    - name: Add current user's public key to deploy user's authorized_keys
+      authorized_key: user={{ deploy_user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" state=present
+
+    - name: Add deploy user to sudoers
+      lineinfile: dest=/etc/sudoers backup=yes regexp='^{{ deploy_user }}' line="{{ deploy_sudoers }}" state=present
+
+    - name: Generate locale
+      locale_gen: name=en_US.UTF-8 state=present
+
+    - name: Update sshd config to disallow root logins
+      lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitRootLogin line="PermitRootLogin no" state=present
+      notify: restart sshd
+
+  handlers:
+    - name: restart sshd
+      service: name=sshd state=restarted

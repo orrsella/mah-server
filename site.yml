@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  user: deploy
+  sudo: True
+  roles:
+    - common
+    - monitoring
+    - ghost
+    - sella.org

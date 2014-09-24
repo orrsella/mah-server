@@ -1,0 +1,12 @@
+---
+
+version: 0.5.1
+download_name: "ghost-{{ version }}.zip"
+download_url: "https://ghost.org/zip/{{ download_name }}"
+zip_file: "/opt/{{ download_name }}"
+ghost_dir: /opt/ghost
+blog_url: http://orrsella.com
+content_repo: git@github.com:orrsella/orrsella.com-ghost-content.git
+content_dir: /opt/ghost-content
+nginx_site_name: orrsella.com
+nginx_www_dir: /opt/nginx-www/orrsella.com
