@@ -21,18 +21,22 @@ server {
     error_page 500 501 502 503 504  /50x.html;
 
     location /robots.txt {
+        add_header X-Robots-Tag noindex;
         alias {{ nginx_www_dir }}/robots.txt;
     }
 
     location /sitemap.xml {
+        add_header X-Robots-Tag noindex;
         alias {{ nginx_www_dir }}/sitemap.xml;
     }
 
     location /40x.html {
+        add_header X-Robots-Tag noindex;
         alias {{ nginx_www_dir }}/40x.html;
     }
 
     location /50x.html {
+        add_header X-Robots-Tag noindex;
         alias {{ nginx_www_dir }}/50x.html;
     }
 
