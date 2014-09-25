@@ -13,6 +13,10 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>http://orrsella.com/2014/09/24/true-end-to-end-testing-in-scala-scalapeno-2014-talk/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>http://orrsella.com/2014/09/24/integration-and-end-to-end-test-configurations-in-sbt-for-scala-java-projects/</loc>
     <changefreq>monthly</changefreq>
   </url>
