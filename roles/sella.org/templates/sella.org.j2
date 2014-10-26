@@ -1,11 +1,11 @@
 server {
     listen      80;
-    server_name sella.org www.sella.org;
+    server_name {{ domain }} www.{{ domain }};
 
-    access_log  /var/log/nginx/sella.org.access.log;
-    error_log   /var/log/nginx/sella.org.error.log;
+    access_log  /var/log/nginx/{{ domain }}.access.log;
+    error_log   /var/log/nginx/{{ domain }}.error.log;
 
     location / {
-        root {{ nginx_www_dir }}/;
+        root {{ www_root }}/;
     }
 }

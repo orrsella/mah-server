@@ -1,4 +1,4 @@
 ---
 
-nginx_www_dir: /opt/nginx-www/sella.org
-nginx_site_name: sella.org
+domain: sella.org
+www_root: /opt/{{ domain }}
