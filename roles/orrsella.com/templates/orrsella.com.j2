@@ -11,6 +11,11 @@ server {
     access_log  /var/log/nginx/{{ domain }}.access.log;
     error_log   /var/log/nginx/{{ domain }}.error.log;
 
+    gzip on;
+    gzip_disable "msie6";
+    gzip_comp_level 6;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
     error_page 404                  /404.html;
     error_page 400 401 403 405      /40x.html;
     error_page 500 501 502 503 504  /50x.html;
@@ -19,7 +24,6 @@ server {
         root {{ www_root }}/;
     }
 
-    rewrite ^/rss       http://orrsella.com/rss.xml     permanent;
     rewrite ^/rss/      http://orrsella.com/rss.xml     permanent;
 
     rewrite ^2014/02/21/the-default-scala-seq-is-mutable-wait-what/                      http://orrsella.com/2014/02/27/the-default-scala-seq-is-mutable-wait-what/                                  permanent;
