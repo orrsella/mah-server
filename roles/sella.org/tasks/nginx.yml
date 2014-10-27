@@ -9,4 +9,4 @@
   notify: restart nginx
 
 - name: Sync www dir
-  copy: src=www/ dest={{ www_root }}
+  copy: src=index.html dest={{ www_root }}
