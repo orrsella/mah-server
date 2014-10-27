@@ -26,7 +26,7 @@ and then deploy:
 $ ansible-playbook -i inventories/production/inventory site.yml
 ```
 
-You can only deploy a portion of the playbook with tags:
+You can also deploy a subset of the playbooks by using tags:
 
 ```bash
 $ ansible-playbook -i inventories/production/inventory site.yml --tags=jekyll,nginx
