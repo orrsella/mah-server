@@ -3,5 +3,5 @@
 domain: orrsella.com
 www_root: /opt/{{ domain }}
 
-jekyll_repo: ../orrsella.com
-jekyll_site_dir: "{{ jekyll_repo }}/_site/"
+jekyll_src: ../orrsella.com
+jekyll_dest: "{{ jekyll_src }}/_site/"

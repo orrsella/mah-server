@@ -1,4 +1,8 @@
 ---
 
-- name: Sync jekyll _site
-  copy: src={{ jekyll_site_dir }} dest={{ www_root }}
+- name: Build jekyll site locally
+  sudo: false
+  local_action: command jekyll build chdir={{ jekyll_src }}
+
+- name: Sync jekyll site
+  synchronize: src={{ jekyll_dest }} dest={{ www_root }} checksum=yes delete=yes
