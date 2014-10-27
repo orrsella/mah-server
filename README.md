@@ -1,26 +1,25 @@
-# orrsella.com
+# mah-server
 
-Ansible playbooks for [orrsella.com](https://orrsella.com).
+Mah (my) server. Ansible playbooks for deploying [orrsella.com](https://orrsella.com), among other stuff.
 
 ## Requirements
 
-* Ansible
-* [orrsella.com](https://github.com/orrsella/orrsella.com) Jekyll repo at the same level
+* [Ansible](http://www.ansible.com/)
+* [orrsella.com](https://github.com/orrsella/orrsella.com) Jekyll repo at the same directory level
 
-## New server config
+## Deploy
 
-Add new server to `inventories/production/inventory` and run (ubuntu trusty64 14.04 expected):
-
-```bash
-$ ansible-playbook -i inventories/production/inventory new-server.yml
-```
-
-## Run ansible
+First build Jekyll sources:
 
 ```bash
 $ cd ../orrsella.com
 $ jekyll build
 $ cd -
+```
+
+and then deploy:
+
+```bash
 $ ansible-playbook -i inventories/production/inventory site.yml
 ```
 
@@ -30,8 +29,16 @@ $ ansible-playbook -i inventories/production/inventory site.yml
 $ vagrant up
 ```
 
-or
+or:
 
 ```bash
 $ ansible-playbook -i inventories/vagrant/inventory site.yml
+```
+
+## New Server
+
+Add new server (ubuntu trusty64 14.04 expected) to `inventories/production/inventory` and run:
+
+```bash
+$ ansible-playbook -i inventories/production/inventory new-server.yml
 ```
