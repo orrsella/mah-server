@@ -8,9 +8,9 @@
   # $ mkpasswd --method=SHA-512 <plaintext-password>
 
   vars:
-    root_pwd: $6$OPYV3p0DTPU$Vu6rQl3jSafP41topJQPjpw9D0oGd2xrv4LgKfJuH9oqoaMcxbW3vt6X9zP6.GEpZEB6qW31HWDt1N204y46v0
+    root_pwd: TODO
     deploy_user: deploy
-    deploy_pwd: $6$nvYeWu5cu.G$cp.f74L/JAq6VqCXr/wqbQElgBHixLQZrjuyLyh7F5X0wqaqu2Ydwm2S3ct5T0hIv8Nw0U5QiBm7l3vKqbehD1
+    deploy_pwd: TODO
     deploy_sudoers: '{{ deploy_user }}  ALL=(ALL) NOPASSWD: ALL'
 
   tasks:
