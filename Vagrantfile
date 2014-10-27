@@ -5,8 +5,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = "vagrant.orrsella.com"
 
-  config.vm.network "forwarded_port", guest: 7770, host: 7769
-  config.vm.network "forwarded_port", guest: 9990, host: 9989
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
   config.vm.provision "ansible" do |ansible|

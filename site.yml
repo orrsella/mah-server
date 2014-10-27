@@ -2,9 +2,9 @@
 
 - hosts: all
   user: deploy
-  sudo: True
+  sudo: true
   roles:
     - common
     - monitoring
-    - ghost
     - sella.org
+    - orrsella.com

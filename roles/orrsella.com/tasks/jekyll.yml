@@ -1,0 +1,4 @@
+---
+
+- name: Sync jekyll _site
+  copy: src={{ jekyll_site_dir }} dest={{ www_root }}

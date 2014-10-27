@@ -1,0 +1,7 @@
+---
+
+domain: orrsella.com
+www_root: /opt/{{ domain }}
+
+jekyll_repo: ../orrsella.com
+jekyll_site_dir: "{{ jekyll_repo }}/_site/"

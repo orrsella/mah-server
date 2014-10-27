@@ -5,6 +5,7 @@ Ansible playbooks for [orrsella.com](https://orrsella.com).
 ## Requirements
 
 * Ansible
+* [orrsella.com](https://github.com/orrsella/orrsella.com) Jekyll repo at the same level
 
 ## New server config
 
@@ -17,17 +18,10 @@ $ ansible-playbook -i inventories/production/inventory new-server.yml
 ## Run ansible
 
 ```bash
+$ cd ../orrsella.com
+$ jekyll build
+$ cd -
 $ ansible-playbook -i inventories/production/inventory site.yml
-```
-
-## Deploy Data
-
-1. Grant new machine deploy rights to [content git repo](https://github.com/orrsella/orrsella.com-ghost-content)
-
-2. Clone content repo to `/opt/ghost-content`:
-
-```bash
-$ git clone git@github.com:orrsella/orrsella.com-ghost-content.git /opt/ghost-content
 ```
 
 ## Testing
