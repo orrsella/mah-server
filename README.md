@@ -1,6 +1,6 @@
 # mah-server
 
-Mah' (my) server. Ansible playbooks for deploying [orrsella.com](https://orrsella.com), among other stuff.
+Mah' (my) server. Ansible playbooks for deploying [orrsella.com](http://orrsella.com), among other stuff.
 
 Replace all `TODO` placeholders with real values.
 
@@ -8,7 +8,7 @@ Replace all `TODO` placeholders with real values.
 
 * [Ansible](http://www.ansible.com/)
 * [Jekyll 2.2+](http://jekyllrb.com/) – `$ gem install jekyll`
-* [orrsella.com](https://github.com/orrsella/orrsella.com) – Jekyll repo at the same directory level
+* [orrsella.com](https://github.com/orrsella/orrsella.com) – Jekyll repo cloned at the same directory level
 * [Vagrant-cachier plugin](https://github.com/fgrehm/vagrant-cachier) – `$ vagrant plugin install vagrant-cachier` (optional but recommended)
 
 ## Deploy
