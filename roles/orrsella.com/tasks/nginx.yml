@@ -7,3 +7,11 @@
 - name: Create nginx symlink for sites-enabled
   file: src=/etc/nginx/sites-available/{{ domain }} dest=/etc/nginx/sites-enabled/{{ domain }} state=link
   notify: restart nginx
+
+- name: Copy ssl crt
+  copy: src=orrsella.com.crt dest=/etc/nginx/ssl/
+  notify: restart nginx
+
+- name: Copy ssl key
+  copy: src=orrsella.com.key dest=/etc/nginx/ssl/
+  notify: restart nginx
