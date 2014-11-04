@@ -27,6 +27,7 @@ server {
         root {{ www_root }}/;
     }
 
+    rewrite ^/rss$      http://orrsella.com/rss.xml     permanent;
     rewrite ^/rss/      http://orrsella.com/rss.xml     permanent;
 
     rewrite ^/2014/02/21/the-default-scala-seq-is-mutable-wait-what                         http://orrsella.com/2014/02/27/the-default-scala-seq-is-mutable-wait-what                           permanent;
