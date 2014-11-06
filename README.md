@@ -23,7 +23,7 @@ You can also deploy a subset of the playbooks by using tags:
 $ ansible-playbook -i inventories/production/inventory site.yml --tags=jekyll,nginx
 ```
 
-## Testing
+## Test
 
 Provision with Vagrant:
 
