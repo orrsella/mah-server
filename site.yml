@@ -2,7 +2,8 @@
 
 - hosts: all
   user: deploy
-  sudo: true
+  become: true
+  become_user: root
   roles:
     - common
     - monitoring

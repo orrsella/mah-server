@@ -1,7 +1,7 @@
 ---
 
 - name: Build jekyll site locally
-  sudo: false
+  become: false
   local_action: command jekyll build chdir={{ jekyll_src }}
 
 - name: Sync jekyll site

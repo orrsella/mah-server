@@ -1,4 +1,7 @@
 ---
 
-- include: monit.yml    tags=monitoring,monit
-- include: logwatch.yml tags=monitoring,logwatch
+- include: monit.yml
+  tags: monitoring,monit
+
+- include: logwatch.yml
+  tags: monitoring,logwatch

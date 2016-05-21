@@ -1,4 +1,7 @@
 ---
 
-- include: jekyll.yml tags=orrsella.com,jekyll
-- include: nginx.yml  tags=orrsella.com,nginx
+- include: jekyll.yml
+  tags: orrsella.com,jekyll
+
+- include: nginx.yml
+  tags: orrsella.com,nginx
