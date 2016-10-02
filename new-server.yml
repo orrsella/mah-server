@@ -2,7 +2,8 @@
 
 - hosts: all
   user: root
-  sudo: true
+  become: true
+  gather_facts: no
 
   # passwords need to be crypted:
   # $ mkpasswd --method=SHA-512 <plaintext-password>
@@ -12,6 +13,11 @@
     deploy_user: deploy
     deploy_pwd: TODO
     deploy_sudoers: '{{ deploy_user }}  ALL=(ALL) NOPASSWD: ALL'
+
+  # Required for ubuntu 15+ as it doesn't ship with python 2:
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
 
   tasks:
     - name: Change root password
