@@ -25,8 +25,8 @@ server {
     ssl_session_cache shared:SSL:10m;
     ssl_session_timeout 10m;
 
-    ssl_certificate     /etc/nginx/ssl/{{ domain }}.crt;
-    ssl_certificate_key /etc/nginx/ssl/{{ domain }}.key;
+    ssl_certificate     {{ ssl_certs_path }}/cert.pem;
+    ssl_certificate_key {{ ssl_certs_path }}/privkey.pem;
 
     access_log  /var/log/nginx/{{ domain }}.access.log;
     error_log   /var/log/nginx/{{ domain }}.error.log;

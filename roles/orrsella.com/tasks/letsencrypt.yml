@@ -1,0 +1,19 @@
+---
+
+- name: Download certbot (letsencrypt)
+  get_url:
+    url: https://dl.eff.org/certbot-auto
+    dest: "{{ letsencrypt_bin }}"
+    mode: a+x
+  become: yes
+
+- name: Get first certificate using webroot authenticator
+  command: "{{ letsencrypt_bin }} certonly --non-interactive --agree-tos --text --domain {{ domain }} --domain www.{{ domain }} --email {{ letsencrypt_email }} --expand --authenticator webroot --webroot-path {{ www_root }}"
+  become: yes
+  args:
+    creates: "{{ ssl_certs_path }}"
+  notify: restart nginx
+
+- name: Setup renewal cron twice a day
+  cron: name="Let's Encrypt Renewal" day="*" hour="10,22" minute="5" job="{{ letsencrypt_bin }} renew --non-interactive --renew-hook \"systemctl restart nginx\""
+  become: yes

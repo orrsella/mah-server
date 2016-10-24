@@ -3,5 +3,9 @@
 domain: orrsella.com
 www_root: /opt/{{ domain }}
 
+letsencrypt_email: orr@sella.org
+letsencrypt_bin: /usr/local/bin/certbot-auto
+ssl_certs_path: "/etc/letsencrypt/live/{{ domain }}"
+
 jekyll_src: ../orrsella.com
 jekyll_dest: "{{ jekyll_src }}/_site/"

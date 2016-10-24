@@ -1,5 +1,9 @@
 ---
 
+- name: Ensure www_root exists
+  file: path="{{ www_root }}" state=directory follow=yes
+  become: yes
+
 - name: Configure nginx sites-available
   template: src={{ domain }}.j2 dest=/etc/nginx/sites-available/{{ domain }}
   notify: restart nginx
@@ -9,4 +13,4 @@
   notify: restart nginx
 
 - name: Sync www dir
-  copy: src=index.html dest={{ www_root }}
+  copy: src=index.html dest={{ www_root }}/index.html

@@ -1,17 +1,13 @@
 ---
 
+- name: Ensure www_root exists
+  file: path="{{ www_root }}" state=directory follow=yes
+  become: yes
+
 - name: Configure nginx sites-available
   template: src={{ domain }}.j2 dest=/etc/nginx/sites-available/{{ domain }}
   notify: restart nginx
 
 - name: Create nginx symlink for sites-enabled
   file: src=/etc/nginx/sites-available/{{ domain }} dest=/etc/nginx/sites-enabled/{{ domain }} state=link
-  notify: restart nginx
-
-- name: Copy ssl crt
-  copy: src=orrsella.com.crt dest=/etc/nginx/ssl/
-  notify: restart nginx
-
-- name: Copy ssl key
-  copy: src=orrsella.com.key dest=/etc/nginx/ssl/
   notify: restart nginx

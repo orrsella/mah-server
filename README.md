@@ -11,6 +11,15 @@ Replace all `TODO` placeholders with real values.
 * [orrsella.com](https://github.com/orrsella/orrsella.com) – Jekyll repo cloned at the same directory level
 * [Vagrant-cachier plugin](https://github.com/fgrehm/vagrant-cachier) – `$ vagrant plugin install vagrant-cachier` (optional but recommended)
 
+## Setup New Server
+
+- DNS `A` recoreds over to new IP address so Let's Encrypt can authenticate the domain.
+- Add new server (ubuntu 16.04 expected) to `inventories/production/inventory` and run:
+
+```bash
+$ ansible-playbook -i inventories/production/inventory new-server.yml
+```
+
 ## Deploy
 
 ```bash
@@ -37,10 +46,3 @@ or manually:
 $ ansible-playbook -i inventories/vagrant/inventory site.yml
 ```
 
-## New Server
-
-Add new server (ubuntu trusty64 14.04 expected) to `inventories/production/inventory` and run:
-
-```bash
-$ ansible-playbook -i inventories/production/inventory new-server.yml
-```

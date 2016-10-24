@@ -5,3 +5,6 @@
 
 - include: nginx.yml
   tags: orrsella.com,nginx
+
+- include: letsencrypt.yml
+  tags: orrsella.com,letsencrypt
