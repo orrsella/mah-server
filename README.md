@@ -13,7 +13,7 @@ Replace all `TODO` placeholders with real values.
 
 ## Setup New Server
 
-- DNS `A` recoreds over to new IP address so Let's Encrypt can authenticate the domain.
+- Move DNS `A` records over to new IP address so Let's Encrypt can authenticate the domain.
 - Add new server (ubuntu 16.04 expected) to `inventories/production/inventory` and run:
 
 ```bash
